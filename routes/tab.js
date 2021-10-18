@@ -9,6 +9,7 @@ import DashboardScreen from "./dashboard";
 import NotificationsScreen from "../screens/notification";
 import profileScreen from "../screens/profile";
 
+import CustomButton from "../components/customButton";
 // import DrawerStackScreen from "./drawer";
 
 import { DrawerActions } from '@react-navigation/native';
@@ -27,14 +28,11 @@ export default function TabNavigation() {
               iconName = focused ? "ios-list-box" : "ios-list";
             }else if (route.name == "Profile") {
               iconName = focused ? "ios-person" : "md-person";
-            } else{
-              iconName = focused
-                ? "ios-information-circle"
-                : "ios-information-circle-outline";
-
-              navigation.dispatch(DrawerActions.openDrawer())
-
-            } 
+            } else if (route.name == "Home"){
+              //   navigation.dispatch(DrawerActions.openDrawer())
+              //   iconName = "home"
+              return <CustomButton navigation={navigation} />;
+              }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
@@ -49,6 +47,12 @@ export default function TabNavigation() {
           }}
         />
 
+         <Tabs.Screen name="Home" component={NotificationsScreen} 
+          options={{
+              tabBarLabel: () => null
+          }}
+        />
+         
         
           
         <Tabs.Screen name="Profile" component={profileScreen} />

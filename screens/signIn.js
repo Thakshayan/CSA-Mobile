@@ -10,7 +10,7 @@ export default function SignInScreen({ navigation }) {
     //   <Modal visible={signIn}>
       <View style={styles.container}>
         
-        <View style={{backgroundColor:"#FFF",height:"100%",justifyContent:"center",width:"100%",borderColor:"#3f4d67",borderWidth:2,borderRadius:5}}>
+        <View style={{backgroundColor:"#FFF",marginTop:30,marginBottom:20,height:"100%",justifyContent:"center",width:"100%",borderColor:"#3f4d67",borderWidth:2,borderRadius:5}}>
             {/* <Image source ={require('../images/image.jpg')}
                 style={{width:"100%",height:"43%"}}
             /> */}

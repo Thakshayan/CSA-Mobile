@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 
-import SignInScreen from "./screens/first";
+import SignInScreen from "./screens/signIn";
 import DrawerStackScreen from "./routes/drawer";
 // import TabNavigation from "./routes/tab";
 

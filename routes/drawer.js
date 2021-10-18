@@ -10,7 +10,7 @@ import CustomDrawerContent from "../shared/drawerContent";
 import OnGoingWork from "../screens/onGoingWork";
 import FinishedWork from "../screens/finishedWork";
 import TabNavigation from "./tab";
-import SignInScreen from "../screens/first";
+import SignInScreen from "../screens/signIn";
 import WorkScreen from "../screens/work";
 import WorkTabNavigation from "./workTab";
 
