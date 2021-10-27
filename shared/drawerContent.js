@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,6 +13,7 @@ import {
 import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import * as SecureStore from 'expo-secure-store';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -22,13 +24,28 @@ import {
     DrawerItem,
   } from '@react-navigation/drawer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useQuery } from '@apollo/client';
+import { GET_USERNAME } from '../GraphQL/Queries';
+import Loading from '../components/loading';
 
 export default function CustomDrawerContent(props){
 
     const width = useWindowDimensions().width * 0.3;
     const height = useWindowDimensions().height;
+
+    const [username,setUsername] = useState();
+    const {error,loading,data} = useQuery(GET_USERNAME)
+
+    useEffect(()=>{
+        if(data){
+          setUsername(data.worker_me.username)
+        }
+    },[data])
+
     const signOut = ()=>{
-        alert(height)
+      SecureStore.deleteItemAsync('token').then(
+        props.navigation.navigate('SignInScreen')
+      );
     }
 
     return(
@@ -43,7 +60,7 @@ export default function CustomDrawerContent(props){
                 <Image source={require("../assets/images/profile.jpg")} style={styles.image} />
                   <View style={{justifyContent:'center',alignItems:'center',marginLeft:2,flexDirection:'row'}}>
                       {/* <View style={{borderWidth:2,borderLeftWidth:0,borderColor:'white',height:60,borderTopRightRadius:40,borderBottomRightRadius:40,width:30}}></View> */}
-                      <Text style={styles.name}>Thanabalasingam Thakshayan</Text>
+                      <Text style={styles.name}>{username ? username : "Loading ..."}</Text>
                   </View>
                 </View>
                 <View style={{marginLeft:20}}>

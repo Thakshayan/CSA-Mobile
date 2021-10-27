@@ -1,9 +1,28 @@
 import { Text, View, Button, TextInput,StyleSheet,TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { MaterialIcons } from '@expo/vector-icons';
+import { CONFIRM_FINISH } from "../GraphQL/Mutation";
+import { useMutation } from "@apollo/client";
 
 
-export default function WorkFinishCard() {
+export default function WorkFinishCard({id, state}) {
+
+  const [FinishAppointmentMutation,{loading,error}] = useMutation(CONFIRM_FINISH)
+
+  const finishWork = ()=>{
+    console.log(id)
+    FinishAppointmentMutation({
+      variables:{
+        workId:id
+      }
+    })
+    
+  }
+
+  useEffect(()=>{
+    console.log(state)
+  },[])
+
     return (
         <View >
         <View style={[styles.shadow,styles.elevation]}>
@@ -14,15 +33,26 @@ export default function WorkFinishCard() {
                     </Text>
                     <MaterialIcons name="call-to-action" size={24} color="#2cbe96" style={{marginLeft:10,width:50}}/>
                 </View>
+                {state === 'going' ?<Text style={{color:'#797d7c'}}>
+                    Pending ...
+                </Text>:
                 <Text style={{color:'#797d7c'}}>
-                    Pending...
-                </Text>
+                    Finished
+                </Text>}
             </View>
-            <View>
-              <TouchableOpacity  style={styles.button}> 
+            {!loading ?<View>
+              {state === 'going' ?<TouchableOpacity  style={styles.button} onPress={finishWork}> 
                 <Text style={{color:"white"}}> Confirm Finish </Text>
+              </TouchableOpacity> :
+              <TouchableOpacity  style={styles.button} disabled={true}> 
+                <Text style={{color:"white"}}> Finished </Text>
+              </TouchableOpacity>}
+            </View>:
+            <View>
+              <TouchableOpacity  style={styles.button} disabled={true}> 
+                <Text style={{color:"white"}}> Processing </Text>
               </TouchableOpacity>
-            </View>
+            </View>}
         </View>
         
       </View>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Feather } from '@expo/vector-icons';
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { Text, View, Button, TextInput } from "react-native";
@@ -8,7 +9,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import Header from "../shared/header";
 
 import HomeScreen from "../screens/home";
-import DetailScreen from "../screens/detail";
+//import DetailScreen from "../screens/detail";
 // import DrawerStackScreen from "./drawer";
 import WorkScreen from "../screens/work";
 
@@ -32,11 +33,11 @@ export default function DashboardScreen() {
             backgroundColor:"#3f4d67"
           },
           headerLeft: () => {
-            return null;
+            return null
           },
       })}
       />
-      <Dashboard.Screen
+      {/* <Dashboard.Screen
         name="WorkScreen"
         component={WorkScreen}
         options={{
@@ -46,7 +47,7 @@ export default function DashboardScreen() {
           ),
           headerBackTitle: "Back",
         }}
-      />
+      /> */}
     </Dashboard.Navigator>
   );
 }

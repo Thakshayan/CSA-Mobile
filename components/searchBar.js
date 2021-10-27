@@ -2,11 +2,14 @@ import { Text, View, Button, TextInput, ScrollView,StyleSheet,useWindowDimension
 import React from "react";
 import WorkCard from "../components/workCard";
 import {MaterialIcons} from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 
-export default function SearchBar() {
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+export default function SearchBar({placeholder,id,setId}) {
 
   const width = useWindowDimensions().width * 0.75;
+
+  
 
     return (
 
@@ -18,13 +21,16 @@ export default function SearchBar() {
         
           <TextInput
           style={[styles.input,{width:width}]}
-          //onChangeText={onChangeNumber}
-          //value={number}
-          placeholder="Enter Work ID ...."
+          onChangeText={setId}
+          value={id}
+          placeholder={placeholder}
         //   keyboardType="numeric"
           />
         <View style={styles.iconContainer}>
+            <TouchableOpacity onPress={()=>{
+            }}>
             <MaterialIcons name='search'  size={24} style={styles.icon}/>
+            </TouchableOpacity>
         </View>
           
       </View>

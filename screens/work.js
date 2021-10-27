@@ -1,16 +1,47 @@
 import { Text, View, Button, TextInput, ScrollView,StyleSheet,useWindowDimensions, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign } from '@expo/vector-icons';
 import CardContent from "../components/cardContent";
 import WorkFinishCard from "../components/workFinishCard";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_WORK } from "../GraphQL/Queries";
+import { CONFIRM_FINISH } from "../GraphQL/Mutation";
+import Loading from "../components/loading";
 
 export default function WorkScreen({route,navigation}) {
 
   const width = useWindowDimensions().width * 0.3;
 
+  const fetchContent = useQuery(GET_WORK,{
+    variables:{
+      workId:workId
+    }
+  });
+
+  
+  const [workId,setWorkId] = useState();
+  const [workContent,setWorkContent] = useState();
+  const [customerContent,setCustomerContent] = useState();
+  const [state,setState] = useState();
+
   useEffect(()=>{
-    console.log(route.params.workId)
+    setWorkId(route.params.workId)
+    
   },[route])
+
+  useEffect(() => {
+    if(workId){
+
+      fetchContent.refetch({ 
+          workId:workId
+      }).then(data =>{
+          console.log(data.data.worker_SearchMyOngoingWorks[0].state)
+          setWorkContent(data.data.worker_SearchMyOngoingWorks[0].booking)
+          setCustomerContent(data.data.worker_SearchMyOngoingWorks[0].booking.by)
+          setState(data.data.worker_SearchMyOngoingWorks[0].state)
+      })
+    }
+  }, [workId])
 
     return (
 
@@ -38,7 +69,7 @@ export default function WorkScreen({route,navigation}) {
         
         <ScrollView style={{padding:10,}} >
 
-        <WorkFinishCard/>
+        {workContent ? <WorkFinishCard state={state} id={workId}/>:<Loading/>}
 
         <View style={[styles.shadow,styles.elevation,{borderWidth:1,borderColor:'#3f4d67'}]}>
           
@@ -50,32 +81,33 @@ export default function WorkScreen({route,navigation}) {
               Work Info
             </Text>
           </View>
+            { workContent ?
 
-          {(route.params) ?<CardContent
+            <View>
+         <CardContent
               title="Work ID"
               value={route.params.workId}
-          />:null}
+          />
 
           <CardContent
               title="Ordered Date"
-              value="21/12/2012"
+              value={workContent.date}
           />
 
-          <CardContent
-              title="Title"
-              value="Construction Work"
-          />
+
 
           <CardContent
               title="Description"
-              value="This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. "
-          />
+              value={workContent.description}
+              />
 
           <CardContent
               title="Address"
-              value="This is a sample Address"
+              value={workContent.workStationAddress}
           />
 
+            </View>
+          :null}
 
           
           <View style={{height:20}}></View>
@@ -98,32 +130,30 @@ export default function WorkScreen({route,navigation}) {
             </Text>
           </View>
 
+          {customerContent ? <View>
           <CardContent
-              title="Work ID"
-              value="ID100"
+              title="Customer ID"
+              value={customerContent.username}
           />
 
           <CardContent
-              title="Ordered Date"
-              value="21/12/2012"
+              title="Full Name"
+              value={customerContent.name}
           />
 
           <CardContent
-              title="Title"
-              value="Construction Work"
+              title="Contact Number"
+              value={customerContent.contact_no}
           />
 
           <CardContent
-              title="Description"
-              value="This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. This is a sample description. "
+              title="Email"
+              value={customerContent.email}
           />
 
-          <CardContent
-              title="Address"
-              value="This is a sample Address"
-          />
+          
 
-
+          </View>:null}
           
           <View style={{height:20}}></View>
           

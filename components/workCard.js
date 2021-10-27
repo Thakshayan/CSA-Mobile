@@ -21,15 +21,16 @@ export default function WorkCard({id,title,description,navigation}){
               <View style={{borderWidth:1,borderColor:'#3f4d67',padding:5}} >
                   <View style={{flexDirection:'row'}}>
                     <View style={styles.title}></View>
-                    <View>
+                    <View >
                       <Text>
                         {title}
                       </Text>
                     </View>
                   </View>
                    
-                  
+                  <View style={{alignItems:'center',justifyContent:'center'}}>
                   <Text> {description}</Text>
+                  </View>
                   <TouchableOpacity  style={styles.button} onPress={()=>{
                     navigation.navigate('Work',{workId:id})
                   }}> 

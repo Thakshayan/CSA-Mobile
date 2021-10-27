@@ -2,9 +2,18 @@ import { Text, View, Button, TextInput, StyleSheet, ScrollView } from "react-nat
 import React, { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 
-export default function Card({state,id,navigation}){
+export default function Card({state,id,message,date,navigation}){
 
+  const formatDate = (date) =>{
+    const date_ob = new Date(date);
 
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+    
+    const formatted= `${date_ob.getDate()} ${monthNames[date_ob.getMonth()]} ${date_ob.getFullYear()}`
+
+    return formatted
+  }
 
     return(
     <View >
@@ -12,22 +21,22 @@ export default function Card({state,id,navigation}){
             <View style={{flexDirection:'row'}}>
               {/* {state ?<View style={styles.state}></View>
               :<View style={[styles.state,{backgroundColor:'#c04000'}]}></View>} */}
-              <Text style={styles.heading}>The booking to Jaffna is closed</Text>
+              <Text style={styles.heading}>The booking: {state}</Text>
             </View>
-            <Text> This is a notification a bout the work stage</Text>
+            <Text> {message}</Text>
             <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between',marginTop:10}}>
              
               <View style={{flexDirection:'row',paddingTop:15}}>
-                {state ?<View style={styles.state}></View>
+                {state !== 'open' ?<View style={styles.state}></View>
                 :<View style={[styles.state,{backgroundColor:'#c04000'}]}></View>}
               
-                <Text style={styles.heading}>21 Sep  2012 </Text>
+                <Text style={styles.heading}>{formatDate(date)} </Text>
           
                 {/* <Text style={{color:'linear-gradient(-135deg, rgb(137, 159, 212) 0%, rgb(163, 137, 212) 100%)'}}>21 Sep 2012</Text> */}
               </View>
               <TouchableOpacity  style={styles.button}
                 onPress={()=>{
-                  navigation.navigate('Work',{workId:id})
+                  //navigation.navigate('Work',{workId:id})
                 }}
               > 
                 <Text style={{color:"white"}}> View </Text>

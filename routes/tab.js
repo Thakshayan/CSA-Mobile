@@ -42,9 +42,9 @@ export default function TabNavigation() {
         <Tabs.Screen
           name="Notifications"
           component={NotificationsScreen}
-          options={{
-            tabBarBadge: 3,
-          }}
+          // options={{
+          //   tabBarBadge: 3,
+          // }}
         />
 
          <Tabs.Screen name="Home" component={NotificationsScreen} 

@@ -9,17 +9,17 @@ import OnGoingWork from "../screens/onGoingWork";
 import FinishedWork from "../screens/finishedWork";
 
 // import DrawerStackScreen from "./drawer";
-import CustomButton from "../components/customButton";
 
 import { DrawerActions } from '@react-navigation/native';
 import { TouchableOpacity } from "react-native";
+import CustomButton from "../components/button";
 
 
 const Tabs = createBottomTabNavigator();
 
 export default function WorkTabNavigation() {
     return (
-      <Tabs.Navigator
+      <Tabs.Navigator 
         screenOptions={({ route,navigation }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -28,26 +28,31 @@ export default function WorkTabNavigation() {
               iconName = focused ? "call-to-action" : "call-to-action";
             }else if (route.name == "Finish Work") {
               iconName = focused ? "local-activity" : "local-activity";
-            }  else if (route.name == "Home"){
-            //   navigation.dispatch(DrawerActions.openDrawer())
-            //   iconName = "home"
-            return <CustomButton navigation={navigation} />;
+            } else if (route.name == "Home"){
+               
+               return <CustomButton navigation={navigation} />;
             }
             return <MaterialIcons name={iconName} size={size} color={color} />;
           },
+
         })}
       >
      
-        
-        <Tabs.Screen
-          name="On Going Work"
+
+   
+        <Tabs.Screen name="On Going Work"
           component={OnGoingWork}
           options={{
             tabBarBadge: 3,
           }}
         />
 
-        <Tabs.Screen name="Home" component={FinishedWork} />
+          <Tabs.Screen name="Home" component={OnGoingWork} 
+          options={{
+              tabBarLabel: () => null
+          }}
+        />
+        
           
         <Tabs.Screen name="Finish Work" component={FinishedWork} />
 

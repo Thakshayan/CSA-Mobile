@@ -3,11 +3,11 @@ import {Text,View,StyleSheet,TouchableOpacity, ScrollView} from 'react-native'
 import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
 
 
-export default function Chart(){
+export default function Chart({value}){
     const data=[ 
-        {value:50,color:'#f4c22b',text:60,textColor:'black'}, 
-        {value:80,color:'#c04000',text:60,textColor:'black'}, 
-        {value:90,color:'#1de9b6',text:90,textColor:'black'}]
+        {value:value[1],color:'#f4c22b',text:value[1],textColor:'black'}, 
+        {value:value[2],color:'#c04000',text:value[2],textColor:'black'}, 
+        {value:value[0],color:'#1de9b6',text:value[0],textColor:'black'}]
     return(
         
 

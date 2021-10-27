@@ -27,9 +27,9 @@ export default function DrawerStackScreen(){
 
          <Drawer.Screen name="WorkTabNavigation" component={WorkTabNavigation} />
 
-         <Drawer.Screen name="On Going Work" component={OnGoingWork} />
+         {/* <Drawer.Screen name="On Going Work" component={OnGoingWork} />
         
-         <Drawer.Screen name="Finish Work" component={FinishedWork} />
+         <Drawer.Screen name="Finish Work" component={FinishedWork} /> */}
 
          <Drawer.Screen name="Work" component={WorkScreen} />
 
