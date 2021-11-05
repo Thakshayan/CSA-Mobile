@@ -1,13 +1,17 @@
 import { Text, View, Button, TextInput, StyleSheet, ScrollView } from "react-native";
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { TouchableOpacity } from "react-native";
 
 import Card from "../components/card";
 
 export default function Pagination({page,setPage,offSet}) {
 
-  const [disable,setDisable] = useState(true);
+  const [disable,setDisable] = useState(false);
     const [offDisable,setOffDisable] = useState(false);
+
+    useEffect(()=>{
+        check(page)
+    },[])
 
     const decrement = ()=>{
         if(page > 0){
@@ -38,7 +42,7 @@ export default function Pagination({page,setPage,offSet}) {
     }
 
     const increment = ()=>{
-        if(page < offSet-1){ 
+        if(page < offSet){ 
         setPage(page+1)
         check(page)
         }else{
@@ -49,22 +53,34 @@ export default function Pagination({page,setPage,offSet}) {
 
     return (
         <View style={styles.container}>
+            {page > 1 ?
+            <View>
             <TouchableOpacity  
               style={[styles.button,styles.leftButton]} 
-              disable={disable}
+            //   disable={disable}
               onPress={decrement}
               > 
 
                 <Text style={{color:"white"}}> Previous </Text>
 
             </TouchableOpacity>
+            </View>
+            : 
+             <TouchableOpacity/>
+            }
+            {page < offSet ?
+            <View>
             <TouchableOpacity  
               style={[styles.button,styles.rightButton]} 
-              disable={offDisable}
-              onPress={increment}>
+            //   disable={offDisable}
+              onPress={increment }>
               <Text style={{color:"white"}}> Next </Text>
 
             </TouchableOpacity>
+            </View>
+            :
+                null
+            }
         </View>
 
     );
@@ -74,26 +90,31 @@ export default function Pagination({page,setPage,offSet}) {
   const styles = StyleSheet.create({
     container:{
         width:'100%',
-        justifyContent:'center',
+        justifyContent:'space-between',
         padding:10,
-        flexDirection:'row'
+        flexDirection:'row',
+        flex:1
     },
-    rightButton:{
-        padding:20,
+    leftButton:{
+        
         width:100,
+        left:0,
+        
         borderTopRightRadius:23,
         borderBottomRightRadius:23
     },
-    leftButton:{
-        padding:20,
+    rightButton:{
+        
         width:100,
+        right:0,
+        
         borderTopLeftRadius:23,
         borderBottomLeftRadius:23
     },
     button:{
       
       alignItems:"center",
-      justifyContent:"center",
+      //justifyContent:'space-between',
       
       backgroundColor:"#3f4d67",
       paddingVertical:10,

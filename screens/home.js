@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
       var work  =[0,0,0]
 
       objects.map((object)=>{
-        console.log(object)
+        
           if(object._id === 'finished'){
             work[0] = object.Count
           }else if(object._id === 'going'){
@@ -33,7 +33,7 @@ export default function HomeScreen({ navigation }) {
       // work[1]=object[count].Count
       // work[2]=object[count].Count
      
-      console.log(work)
+     
       return work
       
   }

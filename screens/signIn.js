@@ -14,7 +14,7 @@ export default function SignInScreen({ navigation }) {
         onCompleted: data => {
             // store the token with a key value of `token`
             // after the token is stored navigate to the app's main screen
-              console.log(data.signINWorker)
+              
               if(data.signINWorker && !error){
                SecureStore.setItemAsync('token', data.signINWorker).then(
                 navigation.navigate('SecondItem')
@@ -102,7 +102,7 @@ export default function SignInScreen({ navigation }) {
               onPress={()=>{
 
                 if(username && password){
-                  console.log(username,password)
+                  
                   signINWorker({
                     variables:{
                       username: username,

@@ -19,12 +19,30 @@ export default function NotificationsScreen({navigation}) {
     }
   });
 
+  const Count = (objects) => {
+    if(!objects){
+      return 0
+    }
+
+    var count = 0
+
+    for(var i=0;i<objects.length;i++){
+      
+        count += objects[i].Count 
+      }
+
+      return count
+    }
+
+  
+
   const [content,setContent] = useState([])
 
   useEffect(()=>{
-    console.log(data)
+
     if(data){
         setContent(data.worker_getMyNotification)
+        setOffSet(Count(data.getCountNotification)/3)
     }
   },[data])
   
@@ -40,9 +58,10 @@ export default function NotificationsScreen({navigation}) {
        
         
           {content.map(e =>{
+            console.log(e._id)
             return <Card 
               state={true} 
-              id={"ID001"} 
+              id={e._id} 
               message = {e.message}
               date = {e.date}
               navigation={navigation}

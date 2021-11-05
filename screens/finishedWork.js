@@ -23,6 +23,19 @@ export default function FinishedWork({navigation}) {
   const [offSet,setOffSet] = useState();
   const [id,setID] = useState()
 
+  const finishCount = (objects) => {
+    if(!objects){
+      return 0
+    }
+
+    for(var i=0;i<objects.length;i++){
+      if (objects[i]._id ==="finished"){
+        return objects[i].Count 
+      }
+    }
+
+  }
+
   const fetchContent = useQuery(GET_FININISHEDWORK,{
     variables:{
       workerId:id
@@ -32,7 +45,7 @@ export default function FinishedWork({navigation}) {
   const {error,loading,data} = useQuery(GET_FININISHEDWORKS,{
         variables:{
             page:page,
-            offset:3
+            offset:2
         }
     });
   const [content,setContent] = useState([])
@@ -40,9 +53,12 @@ export default function FinishedWork({navigation}) {
   useEffect(()=>{
    
     if(data){
-      console.log(data.worker_getMyFinishedWorks)
+        console.log(data)
         setContent(data.worker_getMyFinishedWorks)
         setContents(data.worker_getMyFinishedWorks)
+        setOffSet(finishCount(data.getCountAssignedAppointments)/2)
+        
+        
     }
   },[data])
 
@@ -52,7 +68,7 @@ export default function FinishedWork({navigation}) {
       fetchContent.refetch({
           workerId:id   
       }).then(async (datas) =>{
-        console.log(datas)
+   
         await setContent(datas.data.worker_SearchMyFinishedWorks)
       })
     }else if (contents){
@@ -70,7 +86,7 @@ export default function FinishedWork({navigation}) {
        <ScrollView >   
         <View>
       
-          {!loading || data ?
+          {!loading && content[0]?
             <View style={{ fontSize: 24,padding:10 }}>
           
               {content[0] ? 
@@ -81,11 +97,15 @@ export default function FinishedWork({navigation}) {
                                 title = {<Paid paid={e.paid}/>}
                                 description = {e.booking.description}
                                 navigation={navigation}
-                                key = {e.appointment_id}
+                                key = {e._id}
                               />
                     })}
                 <View >
-                  <Pagination setPage={setPage} page={page} offSet={offSet}/>
+                  {content[0] ? 
+                    <Pagination setPage={setPage} page={page} offSet={offSet}/>
+                  :
+                    null
+                  }
                 </View>
             </View>
           :

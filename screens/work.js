@@ -35,10 +35,10 @@ export default function WorkScreen({route,navigation}) {
       fetchContent.refetch({ 
           workId:workId
       }).then(data =>{
-          console.log(data.data.worker_SearchMyOngoingWorks[0].state)
-          setWorkContent(data.data.worker_SearchMyOngoingWorks[0].booking)
-          setCustomerContent(data.data.worker_SearchMyOngoingWorks[0].booking.by)
-          setState(data.data.worker_SearchMyOngoingWorks[0].state)
+          
+          setWorkContent(data.data.worker_SearchMyWorks[0].booking)
+          setCustomerContent(data.data.worker_SearchMyWorks[0].booking.by)
+          setState(data.data.worker_SearchMyWorks[0].state)
       })
     }
   }, [workId])

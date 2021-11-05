@@ -19,6 +19,19 @@ export default function OnGoingWork({navigation}) {
   const height = useWindowDimensions().height*0.4
   const [contents,setContents] = useState([]);
 
+  const onGoingCount = (objects) => {
+    if(!objects){
+      return 0
+    }
+
+    for(var i=0;i<objects.length;i++){
+      if (objects[i]._id ==="going"){
+        return objects[i].Count 
+      }
+    }
+
+  }
+
   const [page,setPage] = useState(1);
   const [offSet,setOffSet] = useState();
   const [id,setID] = useState()
@@ -38,10 +51,12 @@ export default function OnGoingWork({navigation}) {
   const [content,setContent] = useState([])
 
   useEffect(()=>{
-    console.log(data)
+    
     if(data){
         setContent(data.worker_getMyOngoingWorks)
         setContents(data.worker_getMyOngoingWorks)
+        setOffSet(onGoingCount(data.getCountAssignedAppointments)/3)
+        console.log(offSet)
     }
   },[data])
 

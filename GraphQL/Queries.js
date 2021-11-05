@@ -30,7 +30,7 @@ const GET_FININISHEDWORKS = gql`
         worker_getMyFinishedWorks(
             offset: $offset, 
             page: $page) {
-
+        _id
         duration
         paid
         booking {
@@ -38,17 +38,26 @@ const GET_FININISHEDWORKS = gql`
         }
         appointment_id
         }
+        getCountAssignedAppointments {
+          _id
+          Count
+        }
     }
 `
 
 const GET_ONGOINGWORKS = gql`
 query Query($offset: Int!, $page: Int!) {
     worker_getMyOngoingWorks(offset: $offset, page: $page) {
+      _id
       appointment_id
       booking {
         description
       }
       duration
+    }
+    getCountAssignedAppointments {
+      _id
+      Count
     }
   }
 `
@@ -57,6 +66,7 @@ const GET_ONGOINGWORK = gql`
 query Query(
     $workerId: String!) {
     worker_SearchMyOngoingWorks(id: $workerId) {
+      _id
       booking {
         description
       }
@@ -68,9 +78,11 @@ query Query(
 `
 
 const GET_FININISHEDWORK = gql`
-    query Query(
-        $workerId: String!) {
+query Query(
+  $workerId: String!) {
+
     worker_SearchMyFinishedWorks(id: $workerId) {
+      _id
       appointment_id
       starting_date
       booking {
@@ -90,6 +102,12 @@ query Query($offset: Int!, $page: Int!) {
       state
     }
     
+    getCountNotification {
+      Count
+      _id
+    }
+ 
+    
   }
 `
 
@@ -104,7 +122,8 @@ const GET_WORKSTAT = gql`
 
 const GET_WORK = gql`
 query Query($workId: String!) {
-    worker_SearchMyOngoingWorks(id: $workId) {
+  worker_SearchMyWorks(id: $workId) {
+      _id
       state
       booking {
         description

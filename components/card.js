@@ -21,7 +21,7 @@ export default function Card({state,id,message,date,navigation}){
             <View style={{flexDirection:'row'}}>
               {/* {state ?<View style={styles.state}></View>
               :<View style={[styles.state,{backgroundColor:'#c04000'}]}></View>} */}
-              <Text style={styles.heading}>The booking: {state}</Text>
+              <Text style={styles.heading}>The booking: {id}</Text>
             </View>
             <Text> {message}</Text>
             <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between',marginTop:10}}>

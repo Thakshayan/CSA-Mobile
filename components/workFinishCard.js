@@ -10,7 +10,7 @@ export default function WorkFinishCard({id, state}) {
   const [FinishAppointmentMutation,{loading,error}] = useMutation(CONFIRM_FINISH)
 
   const finishWork = ()=>{
-    console.log(id)
+   
     FinishAppointmentMutation({
       variables:{
         workId:id
@@ -19,9 +19,11 @@ export default function WorkFinishCard({id, state}) {
     
   }
 
-  useEffect(()=>{
-    console.log(state)
-  },[])
+  
+
+  // useEffect(()=>{
+  //   console.log(state)
+  // },[])
 
     return (
         <View >
