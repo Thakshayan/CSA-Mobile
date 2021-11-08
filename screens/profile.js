@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import {View, SafeAreaView, Text,StyleSheet,TouchableOpacity, ScrollView, Image} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Entypo } from '@expo/vector-icons';
 import Loading from '../components/loading';
+import Rating from '../components/rating';
 
 import { GET_PROFILE } from '../GraphQL/Queries';
 
@@ -18,110 +20,95 @@ const ProfileScreen = () => {
     }
   },[data])
 
-  // const myCustomShare = async() => {
-  //   const shareOptions = {
-  //     message: 'Order your next meal from FoodFinder App. I\'ve already ordered more than 10 meals on it.',
-  //     url: files.appLogo,
-  //     // urls: [files.image1, files.image2]
-  //   }
-
-  //   try {
-  //     const ShareResponse = await Share.open(shareOptions);
-  //     console.log(JSON.stringify(ShareResponse));
-  //   } catch(error) {
-  //     console.log('Error => ', error);
-  //   }
-  // };
+  
 
   return (
+    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
       <ScrollView>
-    <SafeAreaView >
-      <View style={{width:'100%',height:40,backgroundColor:'#3f4d67'}}></View>
-
       {content ?
-    <View style={[styles.container]}>
+      <SafeAreaView >
+        <View style={{width:'100%',height:40,backgroundColor:'#3f4d67'}}></View>
 
-      <View style={[styles.userInfoSection,{backgroundColor:"#3f4d67",padding:10,borderRadius:5}]}>
-        <View style={{flexDirection: 'row', marginTop: 5}}>
-        <Image source={require("../assets/images/profile.jpg")} style={styles.image} />
-          <View style={{marginLeft: 20,backgroundColor:"#3f4d67",paddingTop:20,}}>
-            <Text style={[styles.Text, {
-              marginTop:15,
-              marginBottom: 5,
-              color:'white'
+       
+      <View style={[styles.container]}>
+
+        <View style={[styles.userInfoSection,{backgroundColor:"#3f4d67",padding:10,borderRadius:5}]}>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
+          <Image source={require("../assets/images/profile.jpg")} style={styles.image} />
+            <View style={{marginLeft: 20,backgroundColor:"#3f4d67",paddingTop:20,}}>
+              <Text style={[styles.Text, {
+                marginTop:15,
+                marginBottom: 5,
+                color:'white'
+                
+              }]}> {content.name}</Text>
+              <Text style={[styles.Text,{ color:'white',textAlign:'center',justifyContent:'center',paddingLeft:10}]}>-- {content.username}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.userInfoSection}>
+          <View style={styles.row}>
+            <Icon name="map-marker-radius" color="#777777" size={20}/> 
+            <Text style={{color:"#777777", marginLeft: 20}}>{content.address}</Text>
+          </View>
+          <View style={styles.row}>
+            <Icon name="phone" color="#777777" size={20}/> 
+            <Text style={{color:"#777777", marginLeft: 20}}>{content.contact_no}</Text>
+          </View>
+          <View style={styles.row}>
+            <Icon name="email" color="#777777" size={20}/> 
+            <Text style={{color:"#777777", marginLeft: 20}}>{content.email}</Text>
+          </View>
+          <View style={styles.row}>
+            <Entypo name="v-card" size={20} color="#777777" />
+            <Text style={{color:"#777777", marginLeft: 20}}>{content.nic}</Text>
+          </View>
+        </View>
+
+        <View style={[styles.infoBoxWrapper,{backgroundColor:'#3f4d67'}]}>
+            <View style={[styles.infoBox, {
+              borderRightColor: '#dddddd',
+              borderRightWidth: 1,
               
-            }]}> {content.name}</Text>
-            <Text style={[styles.Text,{ color:'white',alignContent:'center',justifyContent:'center',paddingLeft:10}]}>-- {content.username}</Text>
-          </View>
+            }]}>
+              <Text style={{color:'white'}}>
+                {content.rating}
+              </Text>
+              <Text style={{color:'white'}}>
+                Rating
+              </Text>
+            </View>
+            <View style={styles.infoBox}>
+              <Text style={{color:'white'}}>
+                {content.no_of_vote}
+              </Text>
+              <Text style={{color:'white'}}>
+                Votes
+              </Text>
+            </View>
         </View>
-      </View>
 
-      <View style={styles.userInfoSection}>
-        <View style={styles.row}>
-         <Icon name="map-marker-radius" color="#777777" size={20}/> 
-          <Text style={{color:"#777777", marginLeft: 20}}>{content.address}</Text>
-        </View>
-        <View style={styles.row}>
-      <Icon name="phone" color="#777777" size={20}/> 
-          <Text style={{color:"#777777", marginLeft: 20}}>{content.contact_no}</Text>
-        </View>
-        <View style={styles.row}>
-     <Icon name="email" color="#777777" size={20}/> 
-          <Text style={{color:"#777777", marginLeft: 20}}>{content.email}</Text>
-        </View>
-      </View>
+        
 
-      <View style={styles.infoBoxWrapper}>
-          <View style={[styles.infoBox, {
-            borderRightColor: '#dddddd',
-            borderRightWidth: 1
-          }]}>
-            <Text>{content.rating}</Text>
-            <Text>Rating</Text>
-          </View>
-          <View style={styles.infoBox}>
-            <Text>{content.no_of_vote}</Text>
-            <Text>Votes</Text>
-          </View>
-      </View>
-
-      {/* <View style={styles.menuWrapper}>
-        <TouchableOpacity onPress={() => {}}>
-          <View style={styles.menuItem}>
-            {/* //<Icon name="heart-outline" color="#FF6347" size={25}/> */}
-            {/* <Text style={styles.menuItemText}>Your Favorites</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <View style={styles.menuItem}> */}
-            {/* //<Icon name="credit-card" color="#FF6347" size={25}/> */}
-            {/* <Text style={styles.menuItemText}>Payment</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={myCustomShare}>
-          <View style={styles.menuItem}>
-            {/* //<Icon name="share-outline" color="#FF6347" size={25}/> */}
-            {/* <Text style={styles.menuItemText}>Tell Your Friends</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <View style={styles.menuItem}> */}
-            {/* //<Icon name="account-check-outline" color="#FF6347" size={25}/> */}
-            {/* <Text style={styles.menuItemText}>Support</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <View style={styles.menuItem}>  */}
-            {/* //<Icon name="settings-outline" color="#FF6347" size={25}/> */}
-            {/* <Text style={styles.menuItemText}>Settings</Text>
-          </View>
-        </TouchableOpacity>
-      </View> */} 
-      </View>:
+        
+        </View>
+      </SafeAreaView>
+      :
       <Loading/>
       }
-    </SafeAreaView>
     </ScrollView>
+    {
+    content ?
+      <View style={{width:'100%',alignItems:'center',justifyContent:'center',padding:30,backgroundColor:'#3f4d67'}}>
+        <Rating
+          rating={content.rating}
+        />
+      </View>
+    :
+      null
+    }
+  </View>
   );
 };
 

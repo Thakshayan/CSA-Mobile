@@ -25,7 +25,7 @@ export default function TabNavigation() {
             let iconName;
   
             if (route.name == "Notifications") {
-              iconName = focused ? "ios-list-box" : "ios-list";
+              iconName = focused ? "ios-list" : "notifications-sharp";
             }else if (route.name == "Profile") {
               iconName = focused ? "ios-person" : "md-person";
             } else if (route.name == "Home"){

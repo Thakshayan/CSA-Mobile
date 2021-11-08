@@ -80,15 +80,15 @@ export default function OnGoingWork({navigation}) {
 
     return (
      
-      <View style={{flex:1}}>
+      <View style={{flex:1,marginVertical:0,paddingVertical:0}}>
         
         <SearchBar placeholder="Enter work ID ..." id={id} setId={setID}/>
        
         <ScrollView > 
           <View >
-            {!loading || data ?
+            {!loading && content[0]?
               <View style={{ fontSize: 24,padding:10 }}>
-                {content[0] && data ?
+                {content[0] ?
                   <View>
                     { content.map( e =>{
                       return <WorkCard

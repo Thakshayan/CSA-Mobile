@@ -3,14 +3,18 @@ import { Text, View, Button, TextInput, StyleSheet, ScrollView } from "react-nat
 
 import Icon from '@expo/vector-icons/AntDesign';
 import Chart from "../components/pieChart";
+import Rating from "../components/rating";
 import { useQuery } from "@apollo/client";
 import { GET_WORKSTAT } from "../GraphQL/Queries";
+import Loading from "../components/loading";
+import { SafeAreaView } from "react-native";
 
 export default function HomeScreen({ navigation }) {
 
 
     const {error,loading,data} = useQuery(GET_WORKSTAT);
     const [content,setContent] = useState()
+    const [rating,setRating] = useState()
 
     const workCount = (objects) =>{
       if (!objects){
@@ -28,25 +32,25 @@ export default function HomeScreen({ navigation }) {
           }else if(object._id === 'open'){
             work[2] = object.Count
           }
-      })
-      // work[0]=object[count].Count
-      // work[1]=object[count].Count
-      // work[2]=object[count].Count
-     
-     
+      })     
       return work
       
   }
 
     useEffect(()=>{
         if(data){
+          console.log(data)
           setContent(data.worker_workStats)
+          //setRating(data.worker_me.rating)
         }
     },[data])
     
     return (
-      <View>
-        <ScrollView>
+      <View style={{flex:1}}>
+      <ScrollView>
+        <SafeAreaView>
+      {content?<View style={{flex:1,height:'100%'}}>
+        
           <View style={{margin:5}}>
             <View style={[styles.shadow,styles.elevation]}>
               <View style={{justifyContent:'center',alignItems:'center',paddingTop:20}}>
@@ -60,13 +64,24 @@ export default function HomeScreen({ navigation }) {
         
           </View>
           <View style={{backgroundColor:'#3f4d67',height:10,width:'100%'}}/>
-
-        </ScrollView>
-
-      
-      
+          
     </View>
-
+    :
+      <Loading/>
+    }
+    </SafeAreaView>
+    </ScrollView>
+    {
+          rating ?
+          <View style={{width:'100%',alignItems:'center',justifyContent:'center',padding:30,bottom:0,position:'absolute',backgroundColor:'#3f4d67'}}>
+            <Rating
+              rating={rating}
+            />
+          </View>
+        :
+          null
+        }
+    </View>
             // <Button
             //   title="Sign In"
             //   style={{
@@ -87,19 +102,14 @@ export default function HomeScreen({ navigation }) {
   }
 
   const styles = StyleSheet.create({
-    shadow: {  
-    
-      
-      
+    shadow: {     
       shadowColor: 'black',
       shadowRadius: 5,
       shadowOpacity: 1,
-      
       paddingTop:10,
       paddingBottom:10,
       width:"100%",
       borderRadius: 10,
-      // backgroundColor:'#E0FFFF',
       paddingRight:10,
 
     },

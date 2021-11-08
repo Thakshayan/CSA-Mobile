@@ -18,29 +18,34 @@ export default function Card({state,id,message,date,navigation}){
     return(
     <View >
         <View style={[styles.shadow,styles.elevation]}>
+
             <View style={{flexDirection:'row'}}>
-              {/* {state ?<View style={styles.state}></View>
-              :<View style={[styles.state,{backgroundColor:'#c04000'}]}></View>} */}
-              <Text style={styles.heading}>The booking: {id}</Text>
+              <Text style={styles.heading}>The booking: {state}</Text>
             </View>
+
             <Text> {message}</Text>
+
             <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between',marginTop:10}}>
              
               <View style={{flexDirection:'row',paddingTop:15}}>
-                {state !== 'open' ?<View style={styles.state}></View>
-                :<View style={[styles.state,{backgroundColor:'#c04000'}]}></View>}
+
+                {state === 'open' ?
+                  <View style={styles.state}></View>
+                :
+                  <View style={[styles.state,{backgroundColor:'#c04000'}]}></View>
+                }
               
                 <Text style={styles.heading}>{formatDate(date)} </Text>
           
-                {/* <Text style={{color:'linear-gradient(-135deg, rgb(137, 159, 212) 0%, rgb(163, 137, 212) 100%)'}}>21 Sep 2012</Text> */}
+                
               </View>
-              <TouchableOpacity  style={styles.button}
+              {/* <TouchableOpacity  style={styles.button}
                 onPress={()=>{
-                  //navigation.navigate('Work',{workId:id})
+                  navigation.navigate('Work',{workId:id})
                 }}
               > 
                 <Text style={{color:"white"}}> View </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
         </View>
         
@@ -52,8 +57,6 @@ export default function Card({state,id,message,date,navigation}){
 
 const styles = StyleSheet.create({
     shadow: {  
-    
-      
       overflow: 'hidden',
       shadowColor: 'black',
       shadowRadius: 5,

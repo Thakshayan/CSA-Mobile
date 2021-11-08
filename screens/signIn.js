@@ -5,6 +5,7 @@ import {useState} from "react";
 import { useMutation } from "@apollo/client";
 import {SIGNIN} from '../GraphQL/Mutation';
 import * as SecureStore from 'expo-secure-store';
+import { Fontisto } from '@expo/vector-icons';
 
 import { Entypo } from '@expo/vector-icons';
 
@@ -38,17 +39,18 @@ export default function SignInScreen({ navigation }) {
             {/* <Image source ={require('../images/image.jpg')}
                 style={{width:"100%",height:"43%"}}
             /> */}
+            <View style={styles.icon} >
+              <Fontisto name="person" size={50} color="#3f4d67" />
+            </View>
           
-          <Text
-            style={styles.description}
-            >
+
+            <Text style={styles.heading}>
+              Sign In
+            </Text>
+
+            <Text style={styles.description}>
               Sign in with your Employee IDs
-          </Text>
-
-            <Text
-             style={styles.heading}
-            >Sign In</Text>
-
+            </Text>
             
 
             <View style={styles.input}>
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         padding:10,
-        paddingTop:10,
+        paddingTop:40,
         paddingBottom:10,
         justifyContent: 'center',
       
@@ -177,5 +179,9 @@ const styles = StyleSheet.create({
         marginTop:5,
         opacity:0.4
     
+    },
+    icon:{
+      alignItems:'center',
+      justifyContent:'center'
     }
   })

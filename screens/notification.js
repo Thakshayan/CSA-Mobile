@@ -41,15 +41,16 @@ export default function NotificationsScreen({navigation}) {
   useEffect(()=>{
 
     if(data){
+
         setContent(data.worker_getMyNotification)
         setOffSet(Count(data.getCountNotification)/3)
     }
   },[data])
   
     return (
+      <View style={{flex:1,height:'100%'}}>
       <ScrollView>
         <View style={{backgroundColor:"#3f4d67",width:'100%',height:40,alignItems:'center',justifyContent:'center'}}>
-          {/* <Text style={{color:'white',fontSize:18,marginTop:10}}>My Notification</Text> */}
         </View>
         {
       content[0] ? 
@@ -60,7 +61,7 @@ export default function NotificationsScreen({navigation}) {
           {content.map(e =>{
             console.log(e._id)
             return <Card 
-              state={true} 
+              state={e.state} 
               id={e._id} 
               message = {e.message}
               date = {e.date}
@@ -68,26 +69,29 @@ export default function NotificationsScreen({navigation}) {
               key={e._id}/>
           })}
           
-          <Pagination setPage={setPage} page={page} offSet={offSet}/>  
+          
         
       </View>
 
        : <Loading/> }
       
       </ScrollView>
+      {content[0] ?
+        <Pagination setPage={setPage} page={page} offSet={offSet}/>  
+        :
+        null
+      }
+      </View>
     );
   }
 
 
   const styles = StyleSheet.create({
-    button:{
-      
+    button:{ 
       alignItems:"center",
-      justifyContent:"center",
-      
+      justifyContent:"center",  
       backgroundColor:"#3f4d67",
       paddingVertical:10,
-      // borderRadius:23,
       color:"white"
     }
   })

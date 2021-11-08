@@ -209,7 +209,7 @@ export default function CustomDrawerContent(props){
         </View> */}
       </View>
     
-      <View style={{flexDirection: 'row',alignItems:'center',justifyContent:'center',backgroundColor:'#ff5d6510' ,borderRadius: 20,padding:10}} >
+      <View style={{flexDirection: 'row',alignItems:'center',justifyContent:'center',marginTop:20,backgroundColor:'#ff5d6510',position:'relative',bottom:0 ,borderRadius: 20,padding:10}} >
           <TouchableOpacity onPress={signOut}  >
              
               <Text style={{color:'white'}}>
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
       borderBottomRightRadius:50,
       borderTopRightRadius:50,
       left:-8,
-      // paddingLeft:20
+      textAlign:'center'
     },
     
   });

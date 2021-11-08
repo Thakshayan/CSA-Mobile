@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#E5E5E5',
         letterSpacing: 1,
-        left:0
+        right:50,
     },
     icon:{
         opacity:1,

@@ -20,21 +20,22 @@ export default function SearchBar({placeholder,id,setId}) {
         <View style={styles.inputContainer}>
         
           <TextInput
-          style={[styles.input,{width:width}]}
-          onChangeText={setId}
-          value={id}
-          placeholder={placeholder}
+            style={[styles.input,{width:width}]}
+            onChangeText={setId}
+            value={id}
+            placeholder={placeholder}
         //   keyboardType="numeric"
           />
-        <View style={styles.iconContainer}>
+
+          <View style={styles.iconContainer}>
             <TouchableOpacity onPress={()=>{
             }}>
             <MaterialIcons name='search'  size={24} style={styles.icon}/>
             </TouchableOpacity>
-        </View>
+          </View>
           
+        </View>
       </View>
-    </View>
 
 
     );
@@ -50,8 +51,7 @@ export default function SearchBar({placeholder,id,setId}) {
       justifyContent:'space-between',
     
     },
-    icon:{
-      
+    icon:{ 
       color: 'white',
     
     },

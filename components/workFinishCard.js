@@ -19,12 +19,6 @@ export default function WorkFinishCard({id, state}) {
     
   }
 
-  
-
-  // useEffect(()=>{
-  //   console.log(state)
-  // },[])
-
     return (
         <View >
         <View style={[styles.shadow,styles.elevation]}>

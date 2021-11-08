@@ -5,6 +5,7 @@ const GET_PROFILE = gql`
         worker_me {
         username
         name
+        nic
         no_of_vote
         rating
         email
@@ -117,6 +118,9 @@ const GET_WORKSTAT = gql`
       _id
       Count
     }
+    worker_me {
+      rating
+      }
   }
 `
 
