@@ -9,8 +9,6 @@ import {MaterialIcons} from '@expo/vector-icons';
 import Header from "../shared/header";
 
 import HomeScreen from "../screens/home";
-//import DetailScreen from "../screens/detail";
-// import DrawerStackScreen from "./drawer";
 import WorkScreen from "../screens/work";
 
 
