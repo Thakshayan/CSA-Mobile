@@ -4,8 +4,6 @@ import { Feather } from '@expo/vector-icons';
 import { createStackNavigator } from "@react-navigation/stack";
 import { Text, View, Button, TextInput } from "react-native";
 
-import {MaterialIcons} from '@expo/vector-icons';
-
 import Header from "../shared/header";
 
 import HomeScreen from "../screens/home";
